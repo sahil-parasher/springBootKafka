@@ -1,15 +1,34 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.5.0'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
+
+springBoot {
+    mainClass = 'org.example.KafkaApplication'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    // Web starter to provide a REST endpoint for testing
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Core Spring Kafka integration
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation platform('org.junit:junit-bom:6.0.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
